@@ -21,4 +21,11 @@ select "BillingCountry" as"country", concat('$', AVG("Total")) as"Average Sales 
 --ANALYZING EMPLOYEE SALES PERFORMANCE...ANALYZING EMPLOYEE SALES PERFORMANCE...ANALYZING EMPLOYEE SALES PERFORMANCE...
 -- Names of employees/sales rep
  select concat("LastName",'',"FirstName")from "Employee" e 
- 
+ -- Total sales in dollars made by each sales representative
+
+
+select concat(e."LastName",' ',e."FirstName")as "Sales Rep" , Concat('$',sum(i."Total")) as "Total Sales" 
+from "Invoice" as i
+join "Customer" as c on c."CustomerId" = i."CustomerId" 
+join "Employee" as e on e."EmployeeId" = c."SupportRepId" 
+group by e."EmployeeId" ;
