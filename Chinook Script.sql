@@ -20,6 +20,5 @@ select "BillingCountry" as"country", concat('$', AVG("Total")) as"Average Sales 
 
 --ANALYZING EMPLOYEE SALES PERFORMANCE...ANALYZING EMPLOYEE SALES PERFORMANCE...ANALYZING EMPLOYEE SALES PERFORMANCE...
 -- Names of employees/sales rep
-   select concat("LastName",'',"FirstName")from "Employee" e 
- 
+
  
