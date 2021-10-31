@@ -1,4 +1,4 @@
--- ANALYZING SALES  BY COUNTRY... ANALYZING SALES  BY COUNTRY...ANALYZING SALES  BY COUNTRY
+--1.  ANALYZING SALES  BY COUNTRY... ANALYZING SALES  BY COUNTRY...ANALYZING SALES  BY COUNTRY
 
 --Total number of customers in a each country
 select "Country" as "Country", count("CustomerId") as "Number of customers" from "Customer" c group by"Country"  ;
@@ -18,14 +18,23 @@ select "BillingCountry" as"country", concat('$', AVG("Total")) as"Average Sales 
 
 
 
---ANALYZING EMPLOYEE SALES PERFORMANCE...ANALYZING EMPLOYEE SALES PERFORMANCE...ANALYZING EMPLOYEE SALES PERFORMANCE...
--- Names of employees/sales rep
- select concat("LastName",'',"FirstName")from "Employee" e 
+--3. ANALYZING EMPLOYEE SALES PERFORMANCE...ANALYZING EMPLOYEE SALES PERFORMANCE...ANALYZING EMPLOYEE SALES PERFORMANCE...
+
  -- Total sales in dollars made by each sales representative
-
-
 select concat(e."LastName",' ',e."FirstName")as "Sales Rep" , Concat('$',sum(i."Total")) as "Total Sales" 
 from "Invoice" as i
 join "Customer" as c on c."CustomerId" = i."CustomerId" 
 join "Employee" as e on e."EmployeeId" = c."SupportRepId" 
 group by e."EmployeeId" ;
+
+
+
+
+
+-- 4. MEDIA TYPES AND CORRESPONDING NUMBER OF TRACKS SOLD...MEDIA TYPES AND CORRESPONDING NUMBER OF TRACKS SOLD
+select mt."Name" as "Media Type" , count(i."InvoiceId") as "Number of Tracks Sold"
+from "Invoice" as i
+join "InvoiceLine" as il on il."InvoiceLineId" = i."InvoiceId" 
+join "Track" as t on t."TrackId" = il."TrackId" 
+join "MediaType" as mt on mt."MediaTypeId" =t."MediaTypeId" 
+group by mt."MediaTypeId" ;
