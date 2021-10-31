@@ -38,3 +38,24 @@ join "InvoiceLine" as il on il."InvoiceLineId" = i."InvoiceId"
 join "Track" as t on t."TrackId" = il."TrackId" 
 join "MediaType" as mt on mt."MediaTypeId" =t."MediaTypeId" 
 group by mt."MediaTypeId" ;
+
+
+
+
+--- 5.ALBUM AND ITS RESPECT NUMBER OF INVOICES
+select a."Title" as "Album Title", count(i."InvoiceId") as "Number of album Sold"
+from "Invoice" as i
+join "InvoiceLine" as il on il."InvoiceLineId" = i."InvoiceId" 
+join "Track" as t on t."TrackId" = il."TrackId" 
+join "Album" as a on a."AlbumId" = t."AlbumId" 
+group by a."Title"  ;
+
+
+
+
+--- 6. TRACKS AND ITS RESPECT SALE
+select t."Name" as "Track" , count(i."InvoiceId") as "Number of Tracks Sold"
+from "Invoice" as i
+join "InvoiceLine" as il on il."InvoiceLineId" = i."InvoiceId" 
+join "Track" as t on t."TrackId" = il."TrackId" 
+group by t."Name" 
